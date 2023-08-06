@@ -1,0 +1,9 @@
+:host {
+    width: 100%;
+    height: 100%;
+}
+
+::ng-deep .ProseMirror {
+    height: 100%;
+    width: 100%;
+}

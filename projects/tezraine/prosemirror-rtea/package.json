@@ -1,0 +1,18 @@
+{
+  "name": "@tezraine/prosemirror-rtea",
+  "version": "0.0.1",
+  "license": "MIT",
+  "peerDependencies": {
+    "@angular/common": "^15",
+    "@angular/core": "^15",
+    "prosemirror-model": "^1",
+    "prosemirror-state": "^1",
+    "prosemirror-view": "^1",
+    "prosemirror-transform": "^1",
+    "prosemirror-commands": "^1"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "sideEffects": false
+}

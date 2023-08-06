@@ -1,0 +1,14 @@
+<div #toolbar class="toolbar buttons">
+    <ng-container *ngFor=" let button of buttons">
+        <ng-container [ngTemplateOutlet]="buttonTemplate" [ngTemplateOutletContext]="{ $implicit: button }"></ng-container>
+    </ng-container>
+</div>
+
+<ng-template #buttonTemplate ngFor let-item>
+    <button *ngIf="asButton(item) as b" [title]="b.title" [disabled]="isDisabled(b) | async" (click)="b.onClick?.($event)">{{render(b.content)}}</button>
+    <span class="buttonGroup" *ngIf="asButtonGroup(item) as b">
+        <ng-container *ngFor=" let button of b.content">
+            <ng-container [ngTemplateOutlet]="buttonTemplate" [ngTemplateOutletContext]="{ $implicit: button }"></ng-container>
+        </ng-container>
+    </span>
+</ng-template>
