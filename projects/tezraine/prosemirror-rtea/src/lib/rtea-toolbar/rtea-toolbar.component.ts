@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, TemplateRef } from '@angular/core';
 import { ButtonSet, Button, ButtonGroup, HTMLRender } from './toolbar-types';
 import { Observable, of } from 'rxjs';
 
@@ -48,11 +48,20 @@ export class RteaToolbarComponent {
     return of(!!item.disabled);
   }
 
-  render(html: HTMLRender): string | HTMLElement {
+  render(html: HTMLRender, button?: HTMLElement): string | HTMLElement {
     if (typeof html === 'function') {
-      return this.render(html());
+      return this.render(html(), button);
+    }
+
+    if (typeof html !== 'string') {
+      button?.appendChild(html);
+      html = '';
     }
 
     return html;
+  }
+
+  isTemplate(html: HTMLRender) {
+    return this.render(html);
   }
 }

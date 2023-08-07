@@ -1,14 +1,36 @@
 <div #toolbar class="toolbar buttons">
-    <ng-container *ngFor=" let button of buttons">
-        <ng-container [ngTemplateOutlet]="buttonTemplate" [ngTemplateOutletContext]="{ $implicit: button }"></ng-container>
-    </ng-container>
+  <ng-container *ngFor="let button of buttons">
+    <ng-container
+      [ngTemplateOutlet]="buttonTemplate"
+      [ngTemplateOutletContext]="{ $implicit: button }"
+    ></ng-container>
+  </ng-container>
 </div>
 
 <ng-template #buttonTemplate ngFor let-item>
-    <button *ngIf="asButton(item) as b" [title]="b.title" [disabled]="isDisabled(b) | async" (click)="b.onClick?.($event)">{{render(b.content)}}</button>
-    <span class="buttonGroup" *ngIf="asButtonGroup(item) as b">
-        <ng-container *ngFor=" let button of b.content">
-            <ng-container [ngTemplateOutlet]="buttonTemplate" [ngTemplateOutletContext]="{ $implicit: button }"></ng-container>
-        </ng-container>
-    </span>
+  <button
+    #button
+    *ngIf="asButton(item) as b"
+    [title]="b.title"
+    [disabled]="isDisabled(b) | async"
+    (mouseup)="b.onClick?.($event);"
+  >
+    <ng-container *ngIf="b.template; else html">
+      <ng-container
+        [ngTemplateOutlet]="b.template"
+        [ngTemplateOutletContext]="{ $implicit: render(b.content) }"
+      ></ng-container>
+    </ng-container>
+    <ng-template #html>
+      {{ render(b.content, button) }}
+    </ng-template>
+  </button>
+  <span class="buttonGroup" *ngIf="asButtonGroup(item) as b">
+    <ng-container *ngFor="let button of b.content">
+      <ng-container
+        [ngTemplateOutlet]="buttonTemplate"
+        [ngTemplateOutletContext]="{ $implicit: button }"
+      ></ng-container>
+    </ng-container>
+  </span>
 </ng-template>

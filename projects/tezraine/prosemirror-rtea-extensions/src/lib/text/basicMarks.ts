@@ -24,8 +24,8 @@ export const basicMarks = {
   nobreak: getTagMarkSpec('nobr'),
   strike: getTagMarkSpec('strike'),
   strong: getTagMarkSpec('strong'),
-  super: getTagMarkSpec('super'),
+  super: getTagMarkSpec('sup'),
   sub: getTagMarkSpec('sub'),
   mark: getTagMarkSpec('mark'),
-  underline: getTagMarkSpec('underline'),
+  underline: getTagMarkSpec('u'),
 };

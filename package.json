@@ -39,6 +39,7 @@
   "optionalDependencies": {
     "@tezraine/prosemirror-rtea": "./projects/tezraine/prosemirror-rtea",
     "@tezraine/prosemirror-rtea-extentions": "./projects/tezraine/prosemirror-rtea-extentions",
+    "@angular/material": "^15",
     "prosemirror-schema-basic": "^1",
     "prosemirror-inputrules": "^1.0.0",
     "prosemirror-schema-list": "^1.0.0",

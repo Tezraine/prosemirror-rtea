@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { MatIconModule } from '@angular/material/icon';
 
 import { AppComponent } from './app.component';
 import { ProsemirrorRteaModule } from 'projects/tezraine/prosemirror-rtea/src/public-api';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, ProsemirrorRteaModule],
+  imports: [BrowserModule, MatIconModule, ProsemirrorRteaModule],
   providers: [],
   bootstrap: [AppComponent],
 })
