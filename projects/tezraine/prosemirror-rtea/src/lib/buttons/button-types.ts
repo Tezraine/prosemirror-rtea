@@ -17,13 +17,13 @@ export type Button = {
   disabled?: Observable<boolean> | (() => boolean);
 };
 
-export type Select<T> = {
+export type Select = {
   type: 'select';
   title: string;
   options: {
-    [k: string]: T;
+    [k: string]: Attrs | null | undefined;
   };
-  onChange(value: T): void;
+  onChange(value: Attrs | null | undefined): void;
   disabled?: Observable<boolean> | (() => boolean);
 };
 
@@ -33,7 +33,7 @@ export type ControlGroup = {
   content: Control[];
 };
 
-export type Control = Button | Select<any> | ControlGroup;
+export type Control = Button | Select | ControlGroup;
 
 export type ControlSet = (Control | ControlGroup)[];
 
@@ -59,7 +59,9 @@ export function markButtons(
 }
 
 export function markSelectors(
-  marks: { [k: string]: { [k: string]: Attrs } },
+  marks: {
+    [markname: string]: { [fieldName: string]: Attrs | null | undefined };
+  },
   view: EditorView
 ): ControlSet {
   if (!view || !marks) {
@@ -74,6 +76,6 @@ export function markSelectors(
       onChange: (value) => {
         command(view.state, view.dispatch, view, value);
       },
-    } as Select<Attrs>;
+    } as Select;
   });
 }

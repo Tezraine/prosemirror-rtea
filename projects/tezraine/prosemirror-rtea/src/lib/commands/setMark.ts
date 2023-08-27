@@ -17,7 +17,7 @@ import { EditorView } from 'prosemirror-view';
  * @returns true if the command can run, false otherwise.
  */
 export function setMark(markType: MarkType): ParamaterizedCommand<Attrs> {
-  return function (state, dispatch, _view?: EditorView, attrs?: Attrs) {
+  return function (state, dispatch, _view?: EditorView, attrs?: Attrs | null) {
     let { empty, $cursor, ranges } = state.selection as TextSelection;
     if ((empty && !$cursor) || !markApplies(state.doc, ranges, markType))
       return false;

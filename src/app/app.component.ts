@@ -33,8 +33,8 @@ export class AppComponent implements OnInit {
   schema = new Schema({
     nodes: schema.spec.nodes.remove('blockquote'),
     marks: {
-      ...basicTagMarks,
       ...basicStyleMarks,
+      ...basicTagMarks,
     },
   });
   doc = DOMParser.fromSchema(this.schema).parse(textElement);

@@ -4,7 +4,7 @@ export type ParamaterizedCommand<T = undefined> = (
   state: EditorState,
   dispatch?: (tr: Transaction) => void,
   view?: EditorView,
-  opt?: T
+  opt?: T | null
 ) => boolean;
 
 export class BoundCommand<P = undefined> {

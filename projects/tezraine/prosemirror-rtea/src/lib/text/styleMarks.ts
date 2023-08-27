@@ -1,23 +1,47 @@
 import { Attrs, MarkSpec } from 'prosemirror-model';
-import { reduce } from 'rxjs';
 
 export interface StyledMarkSpec<T> extends MarkSpec {}
 
+export type StyleCSSProp = Exclude<
+  {
+    [P in keyof CSSStyleDeclaration]: CSSStyleDeclaration[P] extends string
+      ? P
+      : never;
+  }[keyof CSSStyleDeclaration],
+  number
+>;
+
 export function createStyledMarkSpec<T>(
-  style: string,
+  style: StyleCSSProp,
+  defaultValue: T,
   tag: string = 'span'
 ): StyledMarkSpec<T> {
   return {
-    parseDOM: [{ tag, style }],
+    attrs: { [style]: { default: defaultValue } },
+    parseDOM: [
+      {
+        tag,
+        style,
+        getAttrs(dom): Attrs | null {
+          return typeof dom === 'string'
+            ? null
+            : {
+                [style]: dom.style[style],
+              };
+        },
+      },
+    ],
     toDOM(mark) {
-      return [tag, mark.attrs, 0];
+      const dom = document.createElement(tag);
+      dom.style[style] = mark.attrs[style];
+      return { dom, contentDOM: dom };
     },
   };
 }
 
 export const basicStyleMarks = {
-  fontFamily: createStyledMarkSpec<string>('font-family'),
-  fontSize: createStyledMarkSpec<number>('font-size'),
+  fontFamily: createStyledMarkSpec('fontFamily', 'Arial'),
+  fontSize: createStyledMarkSpec('fontSize', '12px'),
 };
 
 const fontFamilies = [
@@ -32,16 +56,25 @@ const fontFamilies = [
   'Brush Script MT',
 ];
 
-export const basicStyleMarkSelectors: { [k: string]: { [o: string]: Attrs } } =
-  {
-    'Font Family': fontFamilies.reduce((acc, i) => {
-      acc[`${i}`] = { fontFamily: i };
+export type StyleSelectorDefinition = {
+  [k: string]: { [k: string]: Attrs | null };
+};
+
+export const basicStyleMarkSelectors: StyleSelectorDefinition = {
+  fontFamily: fontFamilies.reduce(
+    (acc, i) => {
+      acc[`Font Family: ${i}`] = { fontFamily: i };
       return acc;
-    }, {} as { [o: string]: Attrs }),
-    'Font Size': Array(42)
-      .fill(0)
-      .reduce((acc, _, i) => {
-        acc[`${++i}`] = { fontSize: i };
+    },
+    { Default: { fontFamily: null } } as { [k: string]: Attrs | null }
+  ),
+  fontSize: Array(42)
+    .fill(0)
+    .reduce(
+      (acc, _, i) => {
+        acc[`Font Size: ${++i}`] = { fontSize: i + 'px' };
         return acc;
-      }, {} as { [o: string]: Attrs }),
-  };
+      },
+      { Default: null } as { [k: string]: Attrs | null }
+    ),
+};
