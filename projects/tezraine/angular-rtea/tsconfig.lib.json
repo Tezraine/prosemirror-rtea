@@ -2,6 +2,11 @@
 {
   "extends": "../../../tsconfig.json",
   "compilerOptions": {
+    "paths": {
+      "@tezraine/prosemirror-rtea": [
+        "../../../dist/tezraine/prosemirror-rtea"
+      ]
+    },
     "outDir": "../../../out-tsc/lib",
     "declaration": true,
     "declarationMap": true,

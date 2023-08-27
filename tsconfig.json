@@ -3,11 +3,11 @@
   "compileOnSave": false,
   "compilerOptions": {
     "paths": {
+      "@tezraine/angular-rtea": [
+        "dist/tezraine/angular-rtea"
+      ],
       "@tezraine/prosemirror-rtea": [
         "dist/tezraine/prosemirror-rtea"
-      ],
-      "@tezraine/prosemirror-rtea-extensions": [
-        "dist/tezraine/prosemirror-rtea-extensions"
       ]
     },
     "baseUrl": "./",

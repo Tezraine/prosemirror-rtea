@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "prosemirror-rtea": {
+    "demo": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/prosemirror-rtea",
+            "outputPath": "dist/demo",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -65,10 +65,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "prosemirror-rtea:build:production"
+              "browserTarget": "demo:build:production"
             },
             "development": {
-              "browserTarget": "prosemirror-rtea:build:development"
+              "browserTarget": "demo:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -76,7 +76,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "prosemirror-rtea:build"
+            "browserTarget": "demo:build"
           }
         },
         "test": {
@@ -100,7 +100,40 @@
         }
       }
     },
-    "@tezraine/prosemirror-rtea": {
+    "angular-rtea": {
+      "projectType": "library",
+      "root": "projects/tezraine/angular-rtea",
+      "sourceRoot": "projects/tezraine/angular-rtea/src",
+      "prefix": "artea",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/tezraine/angular-rtea/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/tezraine/angular-rtea/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/tezraine/angular-rtea/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "tsConfig": "projects/tezraine/angular-rtea/tsconfig.spec.json",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ]
+          }
+        }
+      }
+    },
+    "prosemirror-rtea": {
       "projectType": "library",
       "root": "projects/tezraine/prosemirror-rtea",
       "sourceRoot": "projects/tezraine/prosemirror-rtea/src",
@@ -125,39 +158,6 @@
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "tsConfig": "projects/tezraine/prosemirror-rtea/tsconfig.spec.json",
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ]
-          }
-        }
-      }
-    },
-    "@tezraine/prosemirror-rtea-extensions": {
-      "projectType": "library",
-      "root": "projects/tezraine/prosemirror-rtea-extensions",
-      "sourceRoot": "projects/tezraine/prosemirror-rtea-extensions/src",
-      "prefix": "lib",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:ng-packagr",
-          "options": {
-            "project": "projects/tezraine/prosemirror-rtea-extensions/ng-package.json"
-          },
-          "configurations": {
-            "production": {
-              "tsConfig": "projects/tezraine/prosemirror-rtea-extensions/tsconfig.lib.prod.json"
-            },
-            "development": {
-              "tsConfig": "projects/tezraine/prosemirror-rtea-extensions/tsconfig.lib.json"
-            }
-          },
-          "defaultConfiguration": "production"
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "tsConfig": "projects/tezraine/prosemirror-rtea-extensions/tsconfig.spec.json",
             "polyfills": [
               "zone.js",
               "zone.js/testing"

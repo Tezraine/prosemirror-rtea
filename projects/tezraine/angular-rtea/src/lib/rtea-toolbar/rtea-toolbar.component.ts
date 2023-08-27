@@ -1,15 +1,21 @@
-import { Component, Input, TemplateRef } from '@angular/core';
-import { ButtonSet, Button, ButtonGroup, HTMLRender } from './toolbar-types';
+import { Component, Input } from '@angular/core';
+import {
+  ControlSet,
+  Button,
+  HTMLRender,
+  Control,
+  Select,
+} from '@tezraine/prosemirror-rtea';
 import { Observable, of } from 'rxjs';
 
 @Component({
-  selector: 'rtea-toolbar',
+  selector: 'artea-toolbar',
   templateUrl: './rtea-toolbar.component.html',
   styleUrls: ['./rtea-toolbar.component.scss'],
 })
 export class RteaToolbarComponent {
   @Input()
-  buttons: ButtonSet = [];
+  buttons: ControlSet = [];
 
   @Input()
   set update(_: unknown) {
@@ -20,17 +26,25 @@ export class RteaToolbarComponent {
     return true; // TODO: implement this!
   }
 
-  asButton(item: Button | ButtonGroup | undefined) {
-    if (!Array.isArray(item?.content)) {
-      return item as Button;
+  asButton(item?: Control) {
+    if (item?.type === 'button') {
+      return item;
     }
 
     return null;
   }
 
-  asButtonGroup(item: Button | ButtonGroup | undefined) {
-    if (Array.isArray(item?.content)) {
-      return item as ButtonGroup;
+  asSelector(item?: Control) {
+    if (item?.type === 'select') {
+      return item;
+    }
+
+    return null;
+  }
+
+  asGroup(item?: Control) {
+    if (item?.type === 'group') {
+      return item;
     }
 
     return null;
@@ -61,7 +75,9 @@ export class RteaToolbarComponent {
     return html;
   }
 
-  isTemplate(html: HTMLRender) {
-    return this.render(html);
+  onSelectChange(selector: Select<any>, event: Event) {
+    selector.onChange(
+      selector.options[(event.target as HTMLSelectElement).value]
+    );
   }
 }

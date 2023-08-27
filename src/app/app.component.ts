@@ -1,12 +1,11 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import {
   OnChangePlugin,
-  basicMarks,
-} from 'projects/tezraine/prosemirror-rtea-extensions/src/public-api';
-import {
+  basicTagMarks,
   Button,
-  ButtonGroup,
+  ControlGroup,
   markButtons,
+  markSelectors,
 } from 'projects/tezraine/prosemirror-rtea/src/public-api';
 import { EditorView } from 'prosemirror-view';
 import { Schema, DOMParser } from 'prosemirror-model';
@@ -17,6 +16,10 @@ import { dropCursor } from 'prosemirror-dropcursor';
 import { gapCursor } from 'prosemirror-gapcursor';
 import { baseKeymap } from 'prosemirror-commands';
 import { textElement } from './testDoc';
+import {
+  basicStyleMarkSelectors,
+  basicStyleMarks,
+} from 'projects/tezraine/prosemirror-rtea/src/lib/text/styleMarks';
 
 @Component({
   selector: 'app-root',
@@ -29,7 +32,10 @@ export class AppComponent implements OnInit {
 
   schema = new Schema({
     nodes: schema.spec.nodes.remove('blockquote'),
-    marks: basicMarks,
+    marks: {
+      ...basicTagMarks,
+      ...basicStyleMarks,
+    },
   });
   doc = DOMParser.fromSchema(this.schema).parse(textElement);
   plugins = [
@@ -42,11 +48,13 @@ export class AppComponent implements OnInit {
   ];
   buttons = (editor: EditorView, ref: TemplateRef<string>) =>
     [
-      ...markButtons(basicMarks, editor),
+      ...markButtons(basicTagMarks, editor),
+      ...markSelectors(basicStyleMarkSelectors, editor),
       {
         title: '',
         content: [
           {
+            type: 'button',
             title: 'undo',
             content: 'undo',
             onClick: () => {
@@ -55,6 +63,7 @@ export class AppComponent implements OnInit {
             },
           } as Button,
           {
+            type: 'button',
             title: 'redo',
             content: 'redo',
             onClick: () => {
@@ -63,10 +72,9 @@ export class AppComponent implements OnInit {
             },
           } as Button,
         ],
-      } as ButtonGroup,
+      } as ControlGroup,
     ].map((b) => {
       b = b as Button;
-      b.template = ref;
       return b;
     });
 

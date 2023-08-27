@@ -3,8 +3,6 @@
   "version": "0.0.1",
   "license": "MIT",
   "peerDependencies": {
-    "@angular/common": "^15",
-    "@angular/core": "^15",
     "prosemirror-model": "^1",
     "prosemirror-state": "^1",
     "prosemirror-view": "^1",

@@ -3,8 +3,10 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
+    "start": "ng serve demo",
+    "build": "ng build demo",
+    "build:art": "ng build angular-rtea --watch",
+    "build:rt": "ng build prosemirror-rtea --watch",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
@@ -37,8 +39,6 @@
     "typescript": "^4"
   },
   "optionalDependencies": {
-    "@tezraine/prosemirror-rtea": "./projects/tezraine/prosemirror-rtea",
-    "@tezraine/prosemirror-rtea-extentions": "./projects/tezraine/prosemirror-rtea-extentions",
     "@angular/material": "^15",
     "prosemirror-schema-basic": "^1",
     "prosemirror-inputrules": "^1.0.0",

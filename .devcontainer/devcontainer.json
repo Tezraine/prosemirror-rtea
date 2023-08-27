@@ -14,8 +14,7 @@
 				"Angular.ng-template",
 				"lucono.karma-test-explorer",
 				"christian-kohler.npm-intellisense",
-				"Codeium.codeium",
-				"Blackboxapp.blackbox"
+				"Codeium.codeium"
 			]
 		}
 	},

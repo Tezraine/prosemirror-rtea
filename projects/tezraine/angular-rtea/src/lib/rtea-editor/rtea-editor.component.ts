@@ -5,7 +5,7 @@ import { EditorView } from 'prosemirror-view';
 import { schema } from 'prosemirror-schema-basic';
 
 @Component({
-  selector: 'rtea-editor',
+  selector: 'artea-editor',
   templateUrl: './rtea-editor.component.html',
   styleUrls: ['./rtea-editor.component.scss'],
 })

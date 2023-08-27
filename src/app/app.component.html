@@ -1,13 +1,13 @@
-<rtea-toolbar
+<artea-toolbar
   [buttons]="buttons(view.editor, iconRef)"
   [update]="updates | async"
-></rtea-toolbar>
-<rtea-editor
+></artea-toolbar>
+<artea-editor
   #view
   [doc]="doc"
   [plugins]="plugins"
   [schema]="schema"
-></rtea-editor>
+></artea-editor>
 
 <ng-template #iconRef let-icon>
   <mat-icon [svgIcon]="icon">{{ icon }}</mat-icon>
