@@ -29,7 +29,7 @@ export class OnChangePlugin extends Plugin {
   constructor() {
     super({
       state: {
-        init: () => {},
+        init: () => undefined,
         apply: (tr, _value, _oldState, newState) => {
           if (tr.docChanged) {
             this.changed.next(newState);

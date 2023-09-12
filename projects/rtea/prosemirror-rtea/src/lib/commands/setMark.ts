@@ -18,7 +18,7 @@ import { EditorView } from 'prosemirror-view';
  */
 export function setMark(markType: MarkType): ParamaterizedCommand<Attrs> {
   return function (state, dispatch, _view?: EditorView, attrs?: Attrs | null) {
-    let { empty, $cursor, ranges } = state.selection as TextSelection;
+    const { empty, $cursor, ranges } = state.selection as TextSelection;
     if ((empty && !$cursor) || !markApplies(state.doc, ranges, markType))
       return false;
 
@@ -41,8 +41,8 @@ export function setMark(markType: MarkType): ParamaterizedCommand<Attrs> {
         tr.removeMark($from.pos, $to.pos, markType);
       } else {
         let from = $from.pos,
-          to = $to.pos,
-          start = $from.nodeAfter,
+          to = $to.pos;
+        const start = $from.nodeAfter,
           end = $to.nodeBefore;
         const spaceStart = spaceStartOffset(start);
         if (from + spaceStart < to) {
@@ -59,11 +59,11 @@ export function setMark(markType: MarkType): ParamaterizedCommand<Attrs> {
 }
 
 function spaceStartOffset(start: Node | null) {
-  return start?.isText ? /^\s*/.exec(start.text!)![0].length : 0;
+  return start?.isText ? /^\s*/.exec(start.text ?? '')?.[0].length ?? 0 : 0;
 }
 
 function spaceEndOffset(end: Node | null) {
-  return end?.isText ? /\s*$/.exec(end.text!)![0].length : 0;
+  return end?.isText ? /\s*$/.exec(end.text ?? '')?.[0].length ?? 0 : 0;
 }
 
 function markApplies(
@@ -72,7 +72,7 @@ function markApplies(
   type: MarkType
 ) {
   for (const element of ranges) {
-    let { $from, $to } = element;
+    const { $from, $to } = element;
     let can =
       $from.depth == 0 && doc.inlineContent && doc.type.allowsMarkType(type);
     doc.nodesBetween($from.pos, $to.pos, (node) => {

@@ -6,8 +6,10 @@ const config: Config = {
   globalSetup: 'jest-preset-angular/global-setup',
   collectCoverage: true,
   collectCoverageFrom: [
-    'src/**/*.{js,jsx,ts,tsx}',
+    // Ignore src, it only contains a demo libs are in projects
     'projects/**/*.{js,jsx,ts,tsx}',
+
+    // Ignore Type, Test, and Dependency files
     '!**/*.d.ts',
     '!**/*.spec.ts',
     '!**/node_modules/**',

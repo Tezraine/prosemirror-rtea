@@ -58,7 +58,7 @@ export class BoundCommand<P = undefined> {
  * @param commands - An object containing the commands.
  * @returns An object of actionSet.<can|dispatch>.<command>()
  */
-export function createCommandSet<T extends Record<string, BoundCommand<any>>>(
+export function createCommandSet<T extends Record<string, BoundCommand<never>>>(
   actionSet: T
 ): {
   can: { [K in keyof T]: T[K]['can'] };

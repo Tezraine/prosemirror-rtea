@@ -1,6 +1,6 @@
 import { Attrs, MarkSpec } from 'prosemirror-model';
 
-export interface StyledMarkSpec<T> extends MarkSpec {}
+export type StyledMarkSpec = MarkSpec;
 
 export type StyleCSSProp = Exclude<
   {
@@ -14,8 +14,8 @@ export type StyleCSSProp = Exclude<
 export function createStyledMarkSpec<T>(
   style: StyleCSSProp,
   defaultValue: T,
-  tag: string = 'span'
-): StyledMarkSpec<T> {
+  tag = 'span'
+): StyledMarkSpec {
   return {
     attrs: { [style]: { default: defaultValue } },
     parseDOM: [

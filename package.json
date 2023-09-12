@@ -8,7 +8,8 @@
     "build:art": "ng build angular-rtea --watch",
     "build:rt": "ng build prosemirror-rtea --watch",
     "watch": "ng build --watch --configuration development",
-    "test": "jest --no-cache"
+    "test": "jest --no-cache",
+    "lint": "ng lint"
   },
   "private": true,
   "dependencies": {
@@ -26,10 +27,18 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^15",
+    "@angular-eslint/builder": "15.2.1",
+    "@angular-eslint/eslint-plugin": "15.2.1",
+    "@angular-eslint/eslint-plugin-template": "15.2.1",
+    "@angular-eslint/schematics": "15.2.1",
+    "@angular-eslint/template-parser": "15.2.1",
     "@angular/cli": "^15",
     "@angular/compiler-cli": "^15",
     "@types/jest": "^29.5.4",
     "@types/node": "^20.6.0",
+    "@typescript-eslint/eslint-plugin": "5.48.2",
+    "@typescript-eslint/parser": "5.48.2",
+    "eslint": "^8.33.0",
     "jest": "^29.6.4",
     "jest-preset-angular": "^13.1.1",
     "ng-packagr": "^15",

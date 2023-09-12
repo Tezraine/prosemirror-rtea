@@ -130,6 +130,15 @@
               "zone.js/testing"
             ]
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/rtea/angular-rtea/src/**/*.ts",
+              "projects/rtea/angular-rtea/src/**/*.html"
+            ]
+          }
         }
       }
     },
@@ -161,6 +170,15 @@
             "polyfills": [
               "zone.js",
               "zone.js/testing"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/rtea/prosemirror-rtea/src/**/*.ts",
+              "projects/rtea/prosemirror-rtea/src/**/*.html"
             ]
           }
         }
