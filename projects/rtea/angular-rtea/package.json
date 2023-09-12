@@ -1,5 +1,5 @@
 {
-  "name": "@tezraine/angular-rtea",
+  "name": "@rtea/angular-rtea",
   "version": "0.0.1",
   "license": "MIT",
   "peerDependencies": {
@@ -10,7 +10,7 @@
     "prosemirror-view": "^1",
     "prosemirror-transform": "^1",
     "prosemirror-commands": "^1",
-    "@tezraine/prosemirror-rtea": "^0.0.1"
+    "@rtea/prosemirror-rtea": "^0.0.1"
   },
   "dependencies": {
     "tslib": "^2.3.0"

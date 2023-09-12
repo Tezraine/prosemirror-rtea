@@ -3,8 +3,8 @@
   "extends": "../../../tsconfig.json",
   "compilerOptions": {
     "paths": {
-      "@tezraine/prosemirror-rtea": [
-        "../../../dist/tezraine/prosemirror-rtea"
+      "@rtea/prosemirror-rtea": [
+        "../../../dist/rtea/prosemirror-rtea"
       ]
     },
     "outDir": "../../../out-tsc/lib",

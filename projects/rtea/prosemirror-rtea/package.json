@@ -1,5 +1,5 @@
 {
-  "name": "@tezraine/prosemirror-rtea",
+  "name": "@rtea/prosemirror-rtea",
   "version": "0.0.1",
   "license": "MIT",
   "peerDependencies": {

@@ -102,21 +102,21 @@
     },
     "angular-rtea": {
       "projectType": "library",
-      "root": "projects/tezraine/angular-rtea",
-      "sourceRoot": "projects/tezraine/angular-rtea/src",
+      "root": "projects/rtea/angular-rtea",
+      "sourceRoot": "projects/rtea/angular-rtea/src",
       "prefix": "artea",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "project": "projects/tezraine/angular-rtea/ng-package.json"
+            "project": "projects/rtea/angular-rtea/ng-package.json"
           },
           "configurations": {
             "production": {
-              "tsConfig": "projects/tezraine/angular-rtea/tsconfig.lib.prod.json"
+              "tsConfig": "projects/rtea/angular-rtea/tsconfig.lib.prod.json"
             },
             "development": {
-              "tsConfig": "projects/tezraine/angular-rtea/tsconfig.lib.json"
+              "tsConfig": "projects/rtea/angular-rtea/tsconfig.lib.json"
             }
           },
           "defaultConfiguration": "production"
@@ -124,7 +124,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "tsConfig": "projects/tezraine/angular-rtea/tsconfig.spec.json",
+            "tsConfig": "projects/rtea/angular-rtea/tsconfig.spec.json",
             "polyfills": [
               "zone.js",
               "zone.js/testing"
@@ -135,21 +135,21 @@
     },
     "prosemirror-rtea": {
       "projectType": "library",
-      "root": "projects/tezraine/prosemirror-rtea",
-      "sourceRoot": "projects/tezraine/prosemirror-rtea/src",
+      "root": "projects/rtea/prosemirror-rtea",
+      "sourceRoot": "projects/rtea/prosemirror-rtea/src",
       "prefix": "lib",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "project": "projects/tezraine/prosemirror-rtea/ng-package.json"
+            "project": "projects/rtea/prosemirror-rtea/ng-package.json"
           },
           "configurations": {
             "production": {
-              "tsConfig": "projects/tezraine/prosemirror-rtea/tsconfig.lib.prod.json"
+              "tsConfig": "projects/rtea/prosemirror-rtea/tsconfig.lib.prod.json"
             },
             "development": {
-              "tsConfig": "projects/tezraine/prosemirror-rtea/tsconfig.lib.json"
+              "tsConfig": "projects/rtea/prosemirror-rtea/tsconfig.lib.json"
             }
           },
           "defaultConfiguration": "production"
@@ -157,7 +157,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "tsConfig": "projects/tezraine/prosemirror-rtea/tsconfig.spec.json",
+            "tsConfig": "projects/rtea/prosemirror-rtea/tsconfig.spec.json",
             "polyfills": [
               "zone.js",
               "zone.js/testing"

@@ -6,7 +6,7 @@ import {
   ControlGroup,
   markButtons,
   markSelectors,
-} from 'projects/tezraine/prosemirror-rtea/src/public-api';
+} from '../../projects/rtea/prosemirror-rtea/src/public-api';
 import { EditorView } from 'prosemirror-view';
 import { Schema, DOMParser } from 'prosemirror-model';
 import { schema } from 'prosemirror-schema-basic';
@@ -19,7 +19,7 @@ import { textElement } from './testDoc';
 import {
   basicStyleMarkSelectors,
   basicStyleMarks,
-} from 'projects/tezraine/prosemirror-rtea/src/lib/text/styleMarks';
+} from '../../projects/rtea/prosemirror-rtea/src/lib/text/styleMarks';
 
 @Component({
   selector: 'app-root',

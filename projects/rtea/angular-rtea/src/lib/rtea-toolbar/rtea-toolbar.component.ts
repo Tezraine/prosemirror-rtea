@@ -5,7 +5,7 @@ import {
   HTMLRender,
   Control,
   Select,
-} from '@tezraine/prosemirror-rtea';
+} from '@rtea/prosemirror-rtea';
 import { Observable, of } from 'rxjs';
 
 @Component({
@@ -75,7 +75,7 @@ export class RteaToolbarComponent {
     return html;
   }
 
-  onSelectChange(selector: Select<any>, event: Event) {
+  onSelectChange(selector: Select, event: Event) {
     selector.onChange(
       selector.options[(event.target as HTMLSelectElement).value]
     );
