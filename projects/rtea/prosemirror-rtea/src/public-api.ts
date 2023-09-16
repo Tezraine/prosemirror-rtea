@@ -2,8 +2,8 @@
  * Public API Surface of prosemirror-rtea-extensions
  */
 
-export * from './lib/buttons/button-types';
-export * from './lib/text/tagMarks';
+export * from '../../angular-rtea/src/lib/rtea-toolbar/button-types';
+export * from './lib/marks/tagMarks';
 export * from './lib/plugins/onChangePlugin';
 
 // Re-export ProseMirror packages for convienence

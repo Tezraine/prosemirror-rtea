@@ -10,6 +10,20 @@ export class OnChangePlugin extends Plugin {
   private changed = new BehaviorSubject<EditorState | undefined>(undefined);
   private updated = new BehaviorSubject<EditorState | undefined>(undefined);
 
+  constructor() {
+    super({
+      state: {
+        init: () => undefined,
+        apply: (tr, _value, _oldState, newState) => {
+          if (tr.docChanged) {
+            this.changed.next(newState);
+          }
+          this.updated.next(newState);
+        },
+      },
+    });
+  }
+
   /**
    * emits the state of the editor on change, or null if the editor hasn't loaded.
    *
@@ -25,18 +39,5 @@ export class OnChangePlugin extends Plugin {
    */
   public onUpdate(): Observable<EditorState | undefined> {
     return this.changed;
-  }
-  constructor() {
-    super({
-      state: {
-        init: () => undefined,
-        apply: (tr, _value, _oldState, newState) => {
-          if (tr.docChanged) {
-            this.changed.next(newState);
-          }
-          this.updated.next(newState);
-        },
-      },
-    });
   }
 }

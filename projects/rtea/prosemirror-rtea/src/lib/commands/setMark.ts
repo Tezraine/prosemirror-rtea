@@ -7,7 +7,7 @@
 
 import { Attrs, MarkType, Node } from 'prosemirror-model';
 import { SelectionRange, TextSelection } from 'prosemirror-state';
-import { ParamaterizedCommand } from '../buttons/boundCommand';
+import { ParamaterizedCommand } from './boundCommand';
 import { EditorView } from 'prosemirror-view';
 
 /**
@@ -59,11 +59,15 @@ export function setMark(markType: MarkType): ParamaterizedCommand<Attrs> {
 }
 
 function spaceStartOffset(start: Node | null) {
-  return start?.isText ? /^\s*/.exec(start.text ?? '')?.[0].length ?? 0 : 0;
+  return regexTextOffset(/^\s*/, start);
 }
 
 function spaceEndOffset(end: Node | null) {
-  return end?.isText ? /\s*$/.exec(end.text ?? '')?.[0].length ?? 0 : 0;
+  return regexTextOffset(/\s*$/, end);
+}
+
+function regexTextOffset(regex: RegExp, node: Node | null) {
+  return node?.isText ? regex.exec(node.text ?? '')?.[0].length ?? 0 : 0;
 }
 
 function markApplies(

@@ -1,12 +1,6 @@
-import { Component, Input } from '@angular/core';
-import {
-  ControlSet,
-  Button,
-  HTMLRender,
-  Control,
-  Select,
-} from '@rtea/prosemirror-rtea';
-import { Observable, of } from 'rxjs';
+import { Component, Input, SecurityContext } from '@angular/core';
+import { Control, ControlGroup } from './button-types';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'artea-toolbar',
@@ -14,70 +8,42 @@ import { Observable, of } from 'rxjs';
   styleUrls: ['./rtea-toolbar.component.scss'],
 })
 export class RteaToolbarComponent {
-  @Input()
-  buttons: ControlSet = [];
+  constructor(private sanitizer: DomSanitizer) {}
 
   @Input()
-  set update(_: unknown) {
-    this.updateRender();
+  controls: (Control | ControlGroup)[] = [];
+
+  sortedControls(): (Control | ControlGroup)[] {
+    return this.controls.sort((a, b) => {
+      if ((a.priority ?? 100) < (b.priority ?? 100)) {
+        return -1;
+      } else if ((a.priority ?? 100) > (b.priority ?? 100)) {
+        return 1;
+      } else {
+        return 0;
+      }
+    });
   }
 
-  public updateRender() {
-    return true; // TODO: implement this!
+  asButton(control: Control) {
+    return control.type === 'button' ? control : null;
   }
 
-  asButton(item?: Control) {
-    if (item?.type === 'button') {
-      return item;
-    }
-
-    return null;
+  asSelect(control: Control) {
+    return control.type === 'select' ? control : null;
   }
 
-  asSelector(item?: Control) {
-    if (item?.type === 'select') {
-      return item;
-    }
-
-    return null;
+  asTemplate(control: Control) {
+    return control.type === 'template' ? control : null;
   }
 
-  asGroup(item?: Control) {
-    if (item?.type === 'group') {
-      return item;
-    }
-
-    return null;
+  asHTML(control: Control) {
+    return control.type === 'html'
+      ? this.sanitizer.sanitize(SecurityContext.HTML, control.element)
+      : null;
   }
 
-  isDisabled(item: Button): Observable<boolean> {
-    if (typeof item.disabled === 'function') {
-      return of(item.disabled());
-    }
-
-    if (typeof item.disabled === 'object') {
-      return item.disabled;
-    }
-
-    return of(!!item.disabled);
-  }
-
-  render(html: HTMLRender, button?: HTMLElement): string | HTMLElement {
-    if (typeof html === 'function') {
-      return this.render(html(), button);
-    }
-
-    if (typeof html !== 'string') {
-      button?.appendChild(html);
-      html = '';
-    }
-
-    return html;
-  }
-
-  onSelectChange(selector: Select, event: Event) {
-    selector.onChange(
-      selector.options[(event.target as HTMLSelectElement).value]
-    );
+  asGroup(control: Control) {
+    return control.type === 'group' ? control : null;
   }
 }

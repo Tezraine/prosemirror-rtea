@@ -19,7 +19,7 @@ import { textElement } from './testDoc';
 import {
   basicStyleMarkSelectors,
   basicStyleMarks,
-} from '../../projects/rtea/prosemirror-rtea/src/lib/text/styleMarks';
+} from '../../projects/rtea/prosemirror-rtea/src/lib/marks/styleMarks';
 
 @Component({
   selector: 'app-root',

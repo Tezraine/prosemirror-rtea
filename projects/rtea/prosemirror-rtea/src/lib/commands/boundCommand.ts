@@ -1,4 +1,4 @@
-import { EditorState, EditorView, Transaction } from './../../public-api';
+import { EditorState, EditorView, Transaction } from '../../public-api';
 
 export type ParamaterizedCommand<T = undefined> = (
   state: EditorState,
@@ -70,8 +70,9 @@ export function createCommandSet<T extends Record<string, BoundCommand<never>>>(
   };
 
   for (const key in actionSet) {
-    set.can[key] = actionSet[key].can;
-    set.dispatch[key] = actionSet[key].dispatch;
+    // rebind functions to keep previous context
+    set.can[key] = actionSet[key].can.bind(actionSet[key]);
+    set.dispatch[key] = actionSet[key].dispatch.bind(actionSet[key]);
   }
 
   return set;

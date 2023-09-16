@@ -1,33 +1,48 @@
-<div #toolbar class="toolbar buttons">
-  <ng-container *ngFor="let button of buttons">
-    <ng-container
-      [ngTemplateOutlet]="buttonTemplate"
-      [ngTemplateOutletContext]="{ $implicit: button }"
-    ></ng-container>
-  </ng-container>
-</div>
-
-<ng-template #buttonTemplate ngFor let-item>
-  <button
-    #button
-    *ngIf="asButton(item) as b"
-    [title]="b.title"
-    [disabled]="isDisabled(b) | async"
-    (mouseup)="b.onClick?.($event);"
-  >
-    {{ render(b.content, button) }}
-  </button>
-  <select *ngIf="asSelector(item) as s" (change)="onSelectChange(s, $event)">
-    <option *ngFor="let option of s.options | keyvalue" [value]="option.key">
-      {{ s.title }}: {{ option.key }}
-    </option>
-  </select>
-  <span class="buttonGroup" *ngIf="asGroup(item) as group">
-    <ng-container *ngFor="let control of group.content">
-      <ng-container
-        [ngTemplateOutlet]="buttonTemplate"
-        [ngTemplateOutletContext]="{ $implicit: control }"
-      ></ng-container>
+<ng-container *ngFor="let control of sortedControls()">
+  <ng-container [ngSwitch]="control.type">
+    <ng-container *ngSwitchCase="'button'">
+      <button
+        *ngIf="asButton(control) as button"
+        [title]="button.title"
+        [disabled]="button.disabled | async"
+        (click)="button.onClick?.($event)"
+      >
+        {{ button.content }}
+      </button>
     </ng-container>
-  </span>
-</ng-template>
+
+    <ng-container *ngSwitchCase="'select'">
+      <select
+        *ngIf="asSelect(control) as select"
+        [title]="select.title"
+        [value]="select.selected | async"
+        [disabled]="select.disabled | async"
+      >
+        <option *ngFor="let option of select.options" [value]="option.value">
+          {{ option.text }}
+        </option>
+      </select>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'template'">
+      <ng-container
+        *ngIf="asTemplate(control) as template"
+        [ngTemplateOutlet]="template.template"
+        [ngTemplateOutletContext]="template.context"
+      >
+      </ng-container>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'html'">
+      <div class="element-wrapper" [innerHTML]="asHTML(control)"></div>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'group'">
+      <artea-toolbar
+        *ngIf="asGroup(control) as group"
+        [title]="group.title"
+        [controls]="group.content"
+      ></artea-toolbar>
+    </ng-container>
+  </ng-container>
+</ng-container>

@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RteaEditorComponent } from './rtea-editor.component';
+import { RteaEditorComponent } from '../../public-api';
 
 describe('RteaEditorComponent', () => {
   let component: RteaEditorComponent;
